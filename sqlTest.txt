@@ -1,0 +1,2 @@
+CREATE TABLE users(id INT AUTO_INCREMENT, name VARCHAR(20), surname VARCHAR(20), age INT,PRIMARY KEY (name));
+INSERT INTO users(name,surname,age) VALUES('Даниил','Кох',21);
