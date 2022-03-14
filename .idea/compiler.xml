@@ -9,6 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="App" />
         <module name="app" />
+        <module name="testTask" />
+        <module name="restApi" />
       </profile>
     </annotationProcessing>
   </component>

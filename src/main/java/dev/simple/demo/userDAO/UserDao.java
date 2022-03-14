@@ -1,15 +1,19 @@
-package dev.simpleapi.demo.userDAO;
+package dev.simple.demo.userDAO;
 
-import dev.simpleapi.demo.model.User;
-import lombok.Data;
+import dev.simple.demo.model.User;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 public class UserDao {
-    private String jdbcUrl = "jdbc:h2:file:./usersdb";
+    private String jdbcUrl = "jdbc:h2:file:./data";
     private String jdbcName = "sa";
     private String jdbcPassword = "";
 
@@ -31,16 +35,27 @@ public class UserDao {
         return connection;
     }
 
-    public void insertIntoUser(String content) {
+    public String getContent() throws IOException, URISyntaxException {
+        URI uri = getClass().getResource(String.format("/%s", "sql.txt")).toURI();
+        String content = Files.lines(Paths.get(uri))
+                .reduce("", String::concat);
+        return content;
+    }
+
+    public boolean insertIntoUser() {
+        boolean bool = false;
         try (Connection connection = getConnection();
              Statement preparedStatement = connection.createStatement()) {
-            preparedStatement.executeUpdate(content);
+            preparedStatement.executeUpdate(getContent());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        bool = true;
+        return bool;
     }
 
     public User updateUser(User user) throws SQLException {
+        User userUpdated = new User();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER)) {
             preparedStatement.setString(1, user.getName());
@@ -50,7 +65,7 @@ public class UserDao {
             preparedStatement.executeUpdate();
 
         }
-        return searchUserByName(user.getName());
+        return new User(user.getId(), user.getName(), user.getSurname(), user.getAge());
     }
 
     public User searchUserByName(String name) {

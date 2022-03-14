@@ -1,4 +1,5 @@
-package dev.simpleapi.demo.model;
+package dev.simple.demo.model;
+
 
 import lombok.Data;
 
@@ -8,6 +9,8 @@ public class User {
     private String name;
     private String surname;
     private int age;
+
+    public User(){}
 
     public User(int id, String name, String surname, int age){
         this.name = name;
