@@ -1,9 +1,0 @@
-CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, name VARCHAR(20), surname VARCHAR(20), age INT,PRIMARY KEY (name));
-INSERT INTO users(name,surname,age) VALUES('Даниил','Кох',21);
-INSERT INTO users(name,surname,age) VALUES('Дмитрий','Потолочных',22);
-INSERT INTO users(name,surname,age) VALUES('Петр','Яковлев',25);
-INSERT INTO users(name,surname,age) VALUES('Лиза','Найденых',18);
-INSERT INTO users(name,surname,age) VALUES('Геннадий','Зеленков',20);
-INSERT INTO users(name,surname,age) VALUES('Наташа','Колова',33);
-INSERT INTO users(name,surname,age) VALUES('Ольга','Козлова',18);
-INSERT INTO users(name,surname,age) VALUES('Никита','Козлов',26);
